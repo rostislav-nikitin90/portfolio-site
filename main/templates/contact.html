@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+<!-- Inherit layout from base.html -->
+
+{% block title %}Contact - My Portfolio - Rostislav Nikitin{% endblock %}
+<!-- Set the page title shown in the browser tab. Child template overrides the title block from base.html -->
+
+{% block page_heading %}
+<h1>My Portfolio - Rostislav Nikitin</h1>
+<!-- Override the page heading block from base.html with a custom heading -->
+{% endblock %}
+
+{% block content %}
+<!-- Start of the main content block for the contact page -->
+
+<h2>Contact Me</h2>
+
+{% if submitted %}
+    <!-- If the form has been submitted successfully, show a thank-you message -->
+    <p class="thank-you-msg">Thank you, {{ name }}! Your message has been received.</p>
+{% else %}
+    <!-- If the form has not been submitted yet, display the contact form -->
+    <form class="contact-form" method="post">
+        <!-- Contact form using POST method to send data securely -->
+
+        {% csrf_token %}
+        <!-- Django CSRF token for security against cross-site request forgery -->
+
+        <label for="name">Name:</label>
+        <!-- Label for the name input field -->
+        <input type="text" id="name" name="name" required><br>
+        <!-- Text input for user's name. Required field -->
+
+        <label for="email">Email:</label>
+        <!-- Label for the email input field -->
+        <input type="email" id="email" name="email" required><br>
+         <!-- Email input field. Required field -->
+
+        <label for="message">Message:</label><br>
+        <!-- Label for the message textarea -->
+        <textarea id="message" name="message" rows="5" required></textarea><br>
+        <!-- Textarea for user's message. 5 rows tall. Required field -->
+
+        <button type="submit">Send</button>
+        <!-- Submit button to send the form data -->
+    </form>
+    <!-- End of contact form -->
+{% endif %}
+<!-- End of conditional: either thank-you message or contact form is shown -->
+
+{% endblock %}
+<!-- End of content block -->

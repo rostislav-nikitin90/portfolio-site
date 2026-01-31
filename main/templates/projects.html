@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+<!-- Inherit layout from base.html -->
+
+{% block title %}Projects - My Portfolio - Rostislav Nikitin{% endblock %}
+<!-- Set the page title shown in the browser tab. Child template overrides the title block from base.html -->
+
+{% block page_heading %}
+<h1>My Portfolio - Rostislav Nikitin</h1>
+<!-- Override the page heading block from base.html with a custom heading -->
+{% endblock %}
+
+{% block content %}
+<!-- Start of the main content block for the projects page -->
+ 
+<h2>My Projects</h2>
+
+<form method="get">
+    <!-- Form for filtering projects by category. Uses GET method so filter appears in URL -->
+
+    <label for="category">Filter by category:</label>
+    <!-- Label for the select dropdown -->
+    
+    <select name="category" id="category">
+        <!-- Dropdown menu for selecting project category -->
+
+        <option value="" {% if not selected_category %}selected{% endif %}>All</option>
+        <!-- Option to show all projects. Selected if no category is chosen -->
+        
+        <option value="web" {% if selected_category == "web" %}selected{% endif %}>Web Development</option>
+        <!-- Option to filter projects by web development. Selected if category is "web" -->
+
+        <option value="illustration" {% if selected_category == "illustration" %}selected{% endif %}>Graphic Design</option>
+        <!-- Option to filter projects by graphic design. Selected if category is "illustration" -->
+    </select>
+    <button class="filter-btn" type="submit">Filter</button>
+    <!-- Submit button to apply the filter -->
+</form>
+
+<div class="gallery">
+    <!-- Gallery container holding all project items -->
+
+    {% for project in projects %}
+    <!-- Loop through each project in the projects list -->
+        <div class="gallery-item">
+            <!-- Individual project item -->
+
+            <div class="project-image-container">
+                <!-- Container for project image and overlay -->
+
+                <a href="#img{{ forloop.counter }}">
+                    <!-- Link to open the modal for this project. Uses loop counter for unique ID -->
+
+                    <img src="{{ project.image_url }}" alt="{{ project.title }}">
+                    <!-- Display project image. Alt text uses project title -->
+
+                    <div class="overlay-project">More Info →</div>
+                    <!-- Overlay text shown on hover prompting user to view more info -->
+                </a>
+            </div>
+            <h3>{{ project.title }}</h3>
+            <!-- Display project title dynamically -->
+
+            <p>{{ project.short_description }}</p>
+            <!-- Display short description of the project -->
+        </div>
+
+        <!-- Modal -->
+        <div id="img{{ forloop.counter }}" class="modal">
+            <!-- Modal window for detailed project info. ID matches link above -->
+
+            <a href="#" class="close">&#x0078</a>
+            <!-- Close button (×) to exit the modal -->
+
+            <img src="{{ project.image_url }}" alt="{{ project.title }}">
+            <!-- Project image displayed inside the modal -->
+
+            <p>{{ project.title }}</p>
+            <!-- Project title inside the modal -->
+             
+            <p>
+                <a href="{{ project.url }}" target="_blank" class="project-link"> View Project → </a>
+                <!-- Link to view the full project in a new tab -->
+            </p>
+            <p class="project-description">{{ project.long_description }}</p>
+            <!-- Detailed project description -->
+
+            <p class="project-tools">{{ project.tools }}</p>
+            <!-- Tools/technologies used in the project -->
+        </div>
+    {% empty %}
+        <!-- If no projects are found, display this message -->
+        <p>No projects found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+<!-- End of content block -->
+
+

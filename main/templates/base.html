@@ -1,0 +1,65 @@
+{% load static %}
+<!-- Load Django's static tag library so we can reference static files like CSS, JS, and images -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Set character encoding to UTF-8 for proper text rendering -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Make the page responsive: ensures proper scaling on mobile devices -->
+
+    <title>{% block title %}My Portfolio{% endblock %}</title>
+    <!-- Page title: can be overridden by child templates using the "title" block -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- Include Normalize.css to reset browser default styles for consistency -->
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Link to custom stylesheet stored in the static/css directory -->
+</head>
+<body>
+    <header>
+        {% block page_heading %}
+        <h1>My Portfolio</h1>
+        <!-- Default heading: child templates can override this block -->
+        {% endblock %}
+
+        <nav>
+            <!-- Navigation menu with links to different pages -->
+
+            <a href="{% url 'home' %}" 
+            class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+            <!-- Link to the Home page. 
+                The 'active' class is applied if the current view's URL name is 'home', 
+                so this link stays underlined when the user is on the Home page. -->
+
+            <a href="{% url 'projects' %}" 
+            class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Projects</a>
+            <!-- Link to the Projects page. 
+                The 'active' class is applied if the current view's URL name is 'projects', 
+                so this link stays underlined when the user is on the Projects page. -->
+
+            <a href="{% url 'contact' %}" 
+            class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+            <!-- Link to the Contact page. 
+                The 'active' class is applied if the current view's URL name is 'contact', 
+                so this link stays underlined when the user is on the Contact page. -->
+        </nav>
+        <!-- End of navigation menu -->
+    </header>
+
+    <main>
+        <!-- Main content area -->
+        {% block content %}
+        <!-- Placeholder for page-specific content injected by child templates -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Footer section -->
+        <p>&copy; 2026 Rostislav Nikitin. All rights reserved.</p>
+    </footer>
+</body>
+</html>

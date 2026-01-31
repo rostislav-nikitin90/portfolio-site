@@ -1,0 +1,435 @@
+/* Base styles */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+body, label, input, textarea {
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+header {
+    background-color: #002147;
+    color: white;
+    padding: 15px;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+nav a { 
+    font-size: 1.125rem;
+    color: white; 
+    text-decoration: none; 
+}
+
+nav a.active{
+    text-decoration: underline;
+}
+
+.filter-btn:active {
+        background-color: #004080;
+}
+
+nav a, h1, h3,
+.thank-you-msg {
+    text-align: center;
+}
+
+main { padding: 20px; }
+
+h2 {
+    font-size: 2.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+
+h2, h3 {
+    font-weight: 600;
+    color: #454040;
+}
+
+p, label {
+    font-size: 1.125rem;
+    color: #494949;
+    line-height: 1.6;
+}
+
+.introduction {
+  display: flex;
+  flex-wrap: wrap;       /* allow items to wrap if not enough space */
+  align-items: center;   /* vertically align when side by side */
+  gap: 2rem;             /* spacing between image and text */
+}
+
+.introduction img {
+  flex: 1 1 200px;       /* flexible: minimum ~200px, grows if space allows */
+  max-width: 250px;      /* keep image from getting too large */
+  height: auto;
+}
+
+.introduction p {
+  flex: 2 1 300px;       /* flexible: minimum ~300px, grows more than image */
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.highlight-name {
+    color: #002147;
+    font-weight: bold;
+}
+
+.latest-project {
+    margin: 2rem auto;
+}
+
+.latest-project-title {
+    font-weight: 600;
+}
+
+.project-image-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.project-link {
+    display: inline-block;
+    background-color: #fff;
+    color: #002147;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+/* Overlay for home.html latest project */
+.overlay-home {
+    position: absolute;
+    inset: 0; /* exactly cover the image */
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 8px; /* match image corners */
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.project-image-container:hover .overlay-home {
+    opacity: 1;
+}
+
+/* Overlay for projects.html gallery items */
+.overlay-project {
+    position: absolute;
+    inset: 0; /* exactly cover the image */
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    border-radius: 6px; /* match gallery images */
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.project-image-container:hover .overlay-project {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gallery layout */
+.gallery { display: block; }
+
+.gallery-item {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item h3 {
+    height: 68px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    text-align: center;
+    z-index: 1000;
+    inset: 0;
+    background-color: rgba(0,33,71,1);
+    overflow-y: auto; /* allow scrolling */
+    padding: 60px 20px;
+}
+
+.project-description,
+.project-tools {
+    text-align: left;
+}
+
+.modal:target { display: block; }
+
+.modal img {
+    max-width: 80%;
+    height: auto;
+    border: 5px solid white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.modal p {
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto 15px auto;
+    line-height: 1.5;
+}
+
+/* Fixed close button */
+.close {
+    position: fixed; /* stays visible while scrolling */
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 1100; /* above modal content */
+}
+.close:hover {
+    color: red; /* hover effect */
+}
+
+.introduction,
+.latest-project,
+.contact-form {
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.contact-form {
+    max-width: 500px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #002147;
+}
+
+.contact-form label,
+.contact-form input,
+.contact-form textarea {
+    font-size: 1.125rem;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.filter-btn,
+.contact-form button {
+    background-color: #002147; 
+    color: #fff;
+    padding: 12px;
+    border: none;
+}
+
+.contact-form button {
+    width: 100%;
+}
+   
+.project-link,
+.filter-btn,
+.contact-form button {
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+footer {
+    background-color: #eee;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+/* Mobile and tablet-specific styles */
+@media (max-width: 1024px) {
+    nav a {
+        display: block;
+        padding: 25px 0px;
+        margin-right: 0px; 
+    }
+
+    nav a:active {
+        background-color: #004080;
+    }
+
+    select {
+        font-size: 1.25rem; /* larger text */ 
+        padding: 0.75rem; /* bigger touch area */ 
+        width: 100%; /* full width for usability */ 
+        margin-bottom: 20px;
+    }
+
+    .overlay-home,
+    .overlay-project {
+        opacity: 1 !important; /* always visible */
+        transform: none !important; /* disable slide animation */
+    }
+
+    .latest-project,
+    .gallery-item {
+        margin-top: 25px;
+    }
+
+    .contact-form {
+        padding: 15px;
+    }
+    
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form button,
+    .filter-btn {
+        font-size: 1.5rem;
+    }
+}
+
+/* Desktop-specific styles */
+@media only screen and (min-width: 1025px) {
+    body { height: 100vh; }
+
+    nav {
+        display: flex;
+        justify-content: center; /* centers links horizontally */
+    }
+
+    nav a {
+        padding: 25px 45px;
+        margin: 0;
+    }
+
+    nav a:hover { 
+        text-decoration: underline; 
+    }
+
+    main {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .latest-project-title {
+        text-align: center;
+    }
+
+    .latest-project {
+        margin-top: 35px;
+    }
+
+    .latest-project .project-image-container {
+        position: relative;
+        display: block;       /* fill parent width */
+        width: 100%;          /* take full width of .latest-project */
+        max-width: none;      /* remove 800px cap */
+    }
+
+    .latest-project .project-image {
+        width: 100%;          /* image fills container */
+        height: auto;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .latest-project .overlay-home {
+        position: absolute;
+        inset: 0;             /* overlay matches image exactly */
+        border-radius: 8px;
+    }
+
+    .project-image-container:hover .project-image {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    nav a:hover,
+    .project-link:hover,
+    .contact-form button:hover {
+        background-color: #004080;
+    }
+
+    .project-link:hover,
+    .contact-form button:hover {
+        color: #fff;
+        border: 2px solid #fff;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(344.33px, 1fr));
+        gap: 20px;
+    }
+
+    .gallery-item {
+        margin-top: 15px;
+    }
+
+    .gallery-item img {
+        cursor: pointer;
+        border: 2px solid #ccc;
+        transition: transform 0.2s;
+    }
+
+    .gallery-item:hover,
+    .gallery-item:active {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+}
+
+

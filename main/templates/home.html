@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+<!-- Inherit layout from base.html -->
+{% load static %}
+<!-- Load Django's static tag library to reference static files -->
+
+{% block title %}Home - My Portfolio - Rostislav Nikitin{% endblock %}
+<!-- Set the page title shown in the browser tab -->
+{% block page_heading %}
+
+<h1>My Portfolio</h1>
+<!-- Main heading for the page -->
+{% endblock %}
+
+{% block content %}
+<!-- Start of the main content block for the home page -->
+
+<h2>Welcome</h2>
+<div class="introduction">
+    <!-- Introduction section with profile image and description -->
+    <img src="{% static 'images/profile.png' %}" alt="Profile Picture">
+    <p>Hello, I'm <span class="highlight-name">{{ name }} {{ surname }}</span>. 
+    <!-- Display student's name dynamically using Django template variables -->
+        This site showcases my projects and achievements in web development and graphic design.
+        I specialize in creating responsive, user-friendly websites and visually engaging digital experiences.
+        My portfolio blends interactive websites with creative visuals to show the full range of my skills.
+    </p>
+</div>
+<div class="latest-project">
+    <!-- Section showcasing student's most recent project -->
+    <h3>Latest Project</h3>
+    <p class="latest-project-title">{{ latest_project.title }}</p>
+    <!-- Display project title dynamically -->
+    
+    <div class="project-image-container">
+        <!-- Container for project image and overlay -->
+        <a href="https://rostislav-nikitin90.github.io/wdd231/finalproject/home.html" target="_blank">
+            <img src="{% static 'images/budva_travel_website.jpg' %}" alt="{{ latest_project.title }}" class="project-image">
+            <div class="overlay-home">View Project →</div>
+        </a>
+    </div>
+    <p>{{ latest_project.description }}</p>
+    <!-- Display project description dynamically -->
+
+    <p>{{ latest_project.tools }}</p>
+    <!-- Display tools/technologies used dynamically -->
+</div>
+{% endblock %}
+<!-- End of content block -->
+
+
